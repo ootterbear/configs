@@ -1,7 +1,7 @@
 # configs
 ootterbear's tui config files
 
-macOS 터미널 환경(zsh · tmux · vim · git · Ghostty) 설정 모음.
+macOS 터미널 환경(zsh · tmux · vim · Ghostty) 설정 모음.
 
 ## 파일 위치
 
@@ -13,9 +13,6 @@ macOS 터미널 환경(zsh · tmux · vim · git · Ghostty) 설정 모음.
 | `zsh/.claude-launcher.zsh` | `~/.claude-launcher.zsh` | `cla` — Claude Code 권한 모드 선택 런처 |
 | `tmux/.tmux.conf` | `~/.tmux.conf` | |
 | `vim/.vimrc` | `~/.vimrc` | colorscheme `habamax` (Vim 9 기본 내장) |
-| `git/.gitconfig` | `~/.gitconfig` | |
-| `git/ignore` | `~/.config/git/ignore` | 전역 gitignore |
-| `gh/config.yml` | `~/.config/gh/config.yml` | `hosts.yml`(토큰)은 포함하지 않음 |
 | `ghostty/config` | `~/.config/ghostty/config` | **클라이언트**(화면을 띄우는 머신)에 설치 |
 | `ghostty/themes/*` | `~/.config/ghostty/themes/` | `habamax`(기본), `Allen-01`, `Allen-01-sel-brown` |
 
@@ -32,10 +29,10 @@ mkdir -p ~/.config/ghostty && ln -sfn ~/configs/ghostty/themes ~/.config/ghostty
 [brew.sh](https://brew.sh) 설치 스크립트로 먼저 설치.
 
 ```sh
-brew install tmux gh kubectx awscli docker
+brew install tmux kubectx awscli docker
 ```
 
-- `tmux`, `gh` — 터미널 기본 도구
+- `tmux` — 터미널 멀티플렉서
 - `kubectx`, `awscli`, `docker` — `.zshrc`가 참조 (docker zsh completion, `~/.zshrc.local`의 AWS/EKS 함수)
 
 ### 셸
