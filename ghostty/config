@@ -1,0 +1,10 @@
+font-family = "Hack"
+font-family = "Noto Sans Mono CJK KR"
+font-size = 14
+
+# Color theme (files in ./themes). Previous inline palette saved as Allen-01-sel-brown.
+theme = habamax
+# theme = Allen-01-sel-brown
+
+# Codex CLI: make Shift+Enter send the same ESC+CR sequence as Option+Enter-style newline.
+keybind = shift+enter=text:\x1b\r
