@@ -15,6 +15,8 @@ macOS 터미널 환경(zsh · tmux · vim · Ghostty) 설정 모음.
 | `vim/.vimrc` | `~/.vimrc` | colorscheme `habamax` (Vim 9 기본 내장) |
 | `ghostty/config` | `~/.config/ghostty/config` | **클라이언트**(화면을 띄우는 머신)에 설치 |
 | `ghostty/themes/*` | `~/.config/ghostty/themes/` | `habamax`(기본), `Allen-01`, `Allen-01-sel-brown` |
+| `iterm2/Allen-01.itermcolors` | iTerm2 › Settings › Profiles › Colors › Color Presets › Import | Ghostty `Allen-01`과 같은 팔레트의 iTerm2 색상 프리셋 |
+| `iterm2/Allen-01.profile.json` | iTerm2 › Settings › Profiles › Other Actions › Import JSON Profiles | 색상 포함 프로필 전체(열 수·Option 키 동작 등) |
 
 심볼릭 링크 예시:
 
