@@ -1,6 +1,8 @@
 
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi
 
 # >>> Codex installer >>>
-export PATH="/Users/allen/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 # <<< Codex installer <<<
