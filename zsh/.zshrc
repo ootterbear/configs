@@ -86,7 +86,7 @@ if command -v docker >/dev/null 2>&1; then
 fi
 
 # Local bin env & PATH
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Claude launcher
@@ -132,7 +132,7 @@ alias tat='tmux a -t'
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # bun completions
-[ -s "/Users/allen/.bun/_bun" ] && source "/Users/allen/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

@@ -6,5 +6,5 @@ font-size = 14
 theme = habamax
 # theme = Allen-01-sel-brown
 
-# Codex CLI: make Shift+Enter send the same ESC+CR sequence as Option+Enter-style newline.
-keybind = shift+enter=text:\x1b\r
+# Shift+Enter is NOT remapped here. Ghostty forwards it as an extended key
+# (CSI 13;2u) and tmux turns it into a real Option+Enter (see tmux/.tmux.conf).
