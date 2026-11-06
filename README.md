@@ -11,7 +11,9 @@ macOS 터미널 환경(zsh · tmux · vim · Ghostty) 설정 모음.
 | `zsh/.zprofile` | `~/.zprofile` | |
 | `zsh/.profile` | `~/.profile` | |
 | `zsh/.claude-launcher.zsh` | `~/.claude-launcher.zsh` | `cla` — Claude Code 권한 모드 선택 런처 |
-| `tmux/.tmux.conf` | `~/.tmux.conf` | |
+| `codex/AGENTS.md` | `~/.codex/AGENTS.md` | 모든 프로젝트에서 `~/worklog/AGENTS.md`의 공통 작업 기록 규칙 참조 |
+| `tmux/.tmux.conf` | `~/.tmux.conf` | TPM 플러그인(resurrect/continuum/yank/prefix-highlight) + habamax 팔레트 |
+| `bin/tmux-yazi` | `~/.local/bin/tmux-yazi` | `prefix+f` popup yazi 래퍼 — 고른 경로를 tmux 버퍼로 |
 | `vim/.vimrc` | `~/.vimrc` | colorscheme `habamax` (Vim 9 기본 내장) |
 | `ghostty/config` | `~/.config/ghostty/config` | **클라이언트**(화면을 띄우는 머신)에 설치 |
 | `ghostty/themes/*` | `~/.config/ghostty/themes/` | `habamax`(기본), `Allen-01`, `Allen-01-sel-brown` |
@@ -24,6 +26,20 @@ macOS 터미널 환경(zsh · tmux · vim · Ghostty) 설정 모음.
 ln -sf ~/configs/zsh/.zshrc ~/.zshrc
 mkdir -p ~/.config/ghostty && ln -sfn ~/configs/ghostty/themes ~/.config/ghostty/themes
 ```
+
+### Codex 작업 기록
+
+`~/worklog/AGENTS.md`가 있는 환경에서 다음과 같이 전역 지침을 연결한다.
+기존 `~/.codex/AGENTS.md`가 있으면 먼저 내용을 확인하고 병합한다.
+
+```sh
+mkdir -p ~/.codex
+ln -s ~/configs/codex/AGENTS.md ~/.codex/AGENTS.md
+```
+
+Codex를 다시 시작하면 모든 프로젝트에서 공통 기록 규칙을 읽고 세션별 작업 기록을 남긴다.
+`~/.codex/AGENTS.override.md`가 있으면 해당 파일이 우선하며, `CODEX_HOME`을 별도로 지정했다면 그 디렉터리에 설치한다.
+전역 지침의 적용 범위는 [공식 AGENTS.md 안내](https://learn.chatgpt.com/docs/agent-configuration/agents-md)를 참고한다.
 
 ## 설치해야 할 것
 
@@ -57,4 +73,3 @@ brew install tmux kubectx awscli docker
 
 ### `.zshrc`가 참조하는 CLI (선택)
 - `claude` (Claude Code), `codex` — 각 공식 설치 스크립트 (`~/.local/bin`)
-- `hermes` — `hermes`, `hermes-noobs` 래퍼 함수용

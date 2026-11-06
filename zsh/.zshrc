@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# PATH 중복 제거: path 배열을 unique로 유지 (이후 어떤 prepend도 중복을 만들지 않음)
+typeset -U path PATH
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -106,6 +109,10 @@ source ~/.claude-launcher.zsh
 #   export EDITOR='nvim'
 # fi
 
+# yazi 기본 opener 는 ${EDITOR:-vi} 를 쓴다. vi 대신 vim(9.1 + ~/.vimrc)으로 열리도록 고정.
+export EDITOR="${EDITOR:-vim}"
+export VISUAL="${VISUAL:-vim}"
+
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
@@ -145,45 +152,3 @@ export OTEL_LOGS_EXPORTER=otlp
 export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 
-# Hermes Agent → 같은 collector, 단 OTLP/HTTP :4318 + 별도 service.name.
-# Claude Code의 gRPC :4317 설정과 충돌하지 않도록 함수 스코프에서만 swap.
-# `hermes` 바이너리의 모든 서브커맨드(setup/model/gateway/plugins/...)에 그대로 적용됨.
-hermes() {
-  # macOS env는 -u 플래그가 VAR=value 할당보다 반드시 먼저 와야 함.
-  env \
-    -u CLAUDE_CODE_ENABLE_TELEMETRY \
-    OTEL_SERVICE_NAME="hermes-agent" \
-    OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf" \
-    OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318" \
-    OTEL_TRACES_EXPORTER="otlp" \
-    OTEL_METRICS_EXPORTER="otlp" \
-    OTEL_LOGS_EXPORTER="otlp" \
-    OTEL_RESOURCE_ATTRIBUTES="deployment.environment=local,host.name=$(hostname)" \
-    OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="cumulative" \
-    command hermes "$@"
-}
-
-# Hermes를 OTel 없이 돌리고 싶을 때 (디버깅/오프라인)
-hermes-noobs() {
-  env \
-    -u OTEL_SERVICE_NAME \
-    -u OTEL_EXPORTER_OTLP_PROTOCOL \
-    -u OTEL_EXPORTER_OTLP_ENDPOINT \
-    -u OTEL_TRACES_EXPORTER \
-    -u OTEL_METRICS_EXPORTER \
-    -u OTEL_LOGS_EXPORTER \
-    -u OTEL_RESOURCE_ATTRIBUTES \
-    -u OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE \
-    -u CLAUDE_CODE_ENABLE_TELEMETRY \
-    command hermes "$@"
-}
-
-# 현재 hermes에 적용될 OTel env를 미리 확인
-hermes-otel-env() {
-  echo "Service:      hermes-agent"
-  echo "Protocol:     http/protobuf"
-  echo "Endpoint:     http://localhost:4318"
-  echo "Resource:     deployment.environment=local,host.name=$(hostname)"
-  echo "Temporality:  cumulative (Prometheus 호환)"
-  echo "ClaudeCode:   비활성 (CLAUDE_CODE_ENABLE_TELEMETRY unset)"
-}
