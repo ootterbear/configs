@@ -64,6 +64,10 @@ brew install tmux kubectx awscli docker
   git clone https://github.com/iamcco/markdown-preview.nvim ~/.vim/pack/markdown/start/markdown-preview.nvim
   ```
 
+### tmux 플러그인 · 파일 탐색 (선택)
+- **TPM** — `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` 후 tmux 재시작, `prefix + I` 로 resurrect/continuum/yank/prefix-highlight 설치
+- **yazi** — Debian엔 apt 패키지가 없다. `sxyazi/yazi` 릴리스의 `yazi-x86_64-unknown-linux-gnu.zip` 을 `~/.local/bin` 에 풀 것. yazi `s`(이름 검색)는 `fd` 를 부르므로 Debian은 `ln -s /usr/bin/fdfind ~/.local/bin/fd` 필요
+
 ### 터미널 앱 (클라이언트)
 - **Ghostty** — [ghostty.org](https://ghostty.org) 에서 다운로드
 - **폰트** — Homebrew cask:
